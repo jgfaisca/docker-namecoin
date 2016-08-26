@@ -22,7 +22,7 @@ TAG="latest"
 # Host directory
 HOSTDIR="/opt/docker/data"
 
-# Container name
+# Namecoin container
 NAME="namecoin"
 
 RPC_USER=$(randomUser)
