@@ -1,2 +1,2 @@
 # docker-namecoind
-Dockerhub build for Namecoin (using nmc repository)
+Automated Dockerhub build for namecoin (using repository)
