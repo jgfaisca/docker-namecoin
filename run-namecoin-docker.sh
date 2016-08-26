@@ -3,14 +3,6 @@
 # Create docker container
 #
 
-# Help function
-function show_help() {
-   echo
-   echo "Invalid number of arguments."
-   echo "Usage: ./$(basename "$0") <container_name>"
-   echo
-}
-
 # Random password function
 function randomPass(){
   < /dev/urandom tr -dc _#A-Z-a-z-0-9 | head -c${1:-32};echo;
@@ -20,12 +12,6 @@ function randomPass(){
 function randomUser(){
   < /dev/urandom tr -dc a-z-0-9 | head -c${1:-8};echo;
 }
-
-# Verify arguments
-if [ $# -ne 1 ] ; then
-    show_help
-    exit 1
-fi
 
 # Docker image
 IMG="zekaf/namecoind"
@@ -37,7 +23,7 @@ TAG="latest"
 HOSTDIR="/opt/docker/data"
 
 # Container name
-NAME="$1"
+NAME="namecoin"
 
 RPC_USER=$(randomUser)
 RPC_PASS=$(randomPass)
@@ -54,13 +40,4 @@ docker run -d \
   -e RPC_PORT=8336 \
   -e PORT=8334 \
   $IMG:$TAG
-
-if [ $? -eq 0 ]; then 
-   echo
-   echo rpcuser=$RPC_USER
-   echo rpcpassword=$RPC_PASS
-   echo
-   exit 0
-else
-   exit 1
-fi
+  
