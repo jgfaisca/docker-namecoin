@@ -14,30 +14,38 @@ function randomUser(){
 }
 
 # Docker image
-IMG="zekaf/namecoind"
-
-# Image tag
+IMG="zekaf/namecoin-core"
 TAG="latest"
+
+# Docker Namecoin container
+NMC_CT="namecoin"
+NMC_IP="10.17.0.2"
+
+# Docker network
+NET_NAME="isolated_nw"
+NET_SUBNET=$(docker network inspect -f \
+'{{range .IPAM.Config}}{{.Subnet}}{{end}}' $NET_NAME)
+
+# Namecoin configuration
+RPC_USER=$(randomUser)
+RPC_PASS=$(randomPass)
+RPC_PORT="8336"
+PORT="8334"
+MAX_CONNECTIONS="10"
 
 # Host directory
 HOSTDIR="/opt/docker/data"
 
-# Namecoin container
-NAME="namecoin"
-
-RPC_USER=$(randomUser)
-RPC_PASS=$(randomPass)
-
 # Create docker container
 docker run -d \
-  --name $NAME \
+  --net $NET_NAME --ip $NMC_IP \
+  --name $NMC_CT \
   --restart=always \
   --volume=$HOSTDIR/$NAME:/data/namecoin \
   -e RPC_USER=$RPC_USER \
   -e RPC_PASS=$RPC_PASS \
-  -e RPC_ALLOW_IP="172.17.0.0/16" \
-  -e MAX_CONNECTIONS=10 \
-  -e RPC_PORT=8336 \
-  -e PORT=8334 \
+  -e RPC_ALLOW_IP=$NET_SUBNET \
+  -e RPC_PORT=$RPC_PORT \
+  -e PORT=$PORT \
+  -e MAX_CONNECTIONS=$MAX_CONNECTIONS \
   $IMG:$TAG
-  

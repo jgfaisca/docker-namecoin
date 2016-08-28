@@ -1,11 +1,11 @@
 # version 1.0
 
-FROM ubuntu:16.04
+FROM ubuntu:latest
 MAINTAINER Jose G. Faisca <jose.faisca@gmail.com>
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ENV IMAGE namecoin/namecoind 
+ENV IMAGE namecoin/namecoin 
 ENV RPC_USER rpc
 ENV RPC_PASS secret
 ENV RPC_ALLOW_IP 127.0.0.1
