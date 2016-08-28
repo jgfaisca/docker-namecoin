@@ -40,7 +40,7 @@ docker run -d \
   --net $NET_NAME --ip $NMC_IP \
   --name $NMC_CT \
   --restart=always \
-  --volume=$HOSTDIR/$NAME:/data/namecoin \
+  --volume=$HOSTDIR/$NMC_CT:/data/namecoin \
   -e RPC_USER=$RPC_USER \
   -e RPC_PASS=$RPC_PASS \
   -e RPC_ALLOW_IP=$NET_SUBNET \
