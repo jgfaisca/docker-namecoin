@@ -35,6 +35,6 @@ RUN cd / \
 COPY run.sh /usr/local/bin/
 ENTRYPOINT ["run.sh"]
 
-EXPOSE 8336/tcp 8334/tcp
+EXPOSE $RPC_PORT/tcp $PORT/tcp
 VOLUME ["/data/namecoin"]
 CMD ["/usr/bin/namecoind", "-datadir=/data/namecoin", "-printtoconsole"]
