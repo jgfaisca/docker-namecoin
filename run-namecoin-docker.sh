@@ -23,8 +23,7 @@ NMC_IP="10.17.0.2"
 
 # Docker network
 NET_NAME="isolated_nw"
-NET_SUBNET=$(docker network inspect -f \
-'{{range .IPAM.Config}}{{.Subnet}}{{end}}' $NET_NAME)
+NET_SUBNET=$(docker network inspect -f '{{range .IPAM.Config}}{{.Subnet}}{{end}}' $NET_NAME)
 
 # Namecoin configuration
 RPC_USER=$(randomUser)
